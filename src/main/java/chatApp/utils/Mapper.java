@@ -1,7 +1,9 @@
 package chatApp.utils;
 
 import chatApp.data.models.Users;
+import chatApp.dtos.requests.CreateChatRequest;
 import chatApp.dtos.requests.RegisterUserRequest;
+import chatApp.dtos.requests.SendMessageRequest;
 import chatApp.dtos.responses.RegisterUserResponse;
 
 import java.time.LocalDateTime;
@@ -24,5 +26,12 @@ public class Mapper {
                 .ofPattern("EEEE dd/MMM/yyy HH:mm:ss a")
                 .format(LocalDateTime.now()));
         return registerUserResponse;
+    }
+
+    public static CreateChatRequest map(SendMessageRequest sendMessageRequest) {
+        CreateChatRequest createChatRequest = new CreateChatRequest();
+        createChatRequest.setFirstUser(sendMessageRequest.getFrom());
+        createChatRequest.setSecondUser(sendMessageRequest.getTo());
+        return createChatRequest;
     }
 }
